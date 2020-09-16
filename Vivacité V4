@@ -1,0 +1,86 @@
+#include <Wire.h>;
+
+byte BP1=B00000001;
+byte BP2=B00000010;
+byte BP3=B00000100;
+byte BP4=B00001000;
+byte alea; 
+
+void setup() {
+
+Wire.begin();
+Serial.begin (9600);
+
+}
+
+void loop() {
+Wire.beginTransmission(0x20);
+Wire.write(B11110000);
+Wire.endTransmission(0x20);
+alea = random(2,6);
+
+RETOUR: 
+
+switch(led_aleatoire) { //switch avec 4 possibilités
+  
+case 1: //cas n°1
+   Wire.beginTransmission(0x20);//commencer la transmission avec la carte d'adresse $27 (carte led)
+   Wire.write(B11100000);//allumer la led 1
+   Wire.endTransmission(0x20);//fin de la transmission avec la carte led
+   Wire.requestFrom(0x21 , 1);//demander 1 octet à la carte d'adresse $20 (carte bp)
+   BP1 = Wire.read();//la variable BP1 prend la valeur de l'octet reçu de la carte bp
+   
+   if (BP1 != 1) // si BP1 est égale à 1
+   {
+    goto RETOUR; //retour au point marqué RETOUR
+        Wire.endTransmission(0x20);
+   }
+ break;
+
+ case 2:
+   Wire.beginTransmission(0x220);
+   Wire.write(B11010000);
+   Wire.endTransmission(0x20);
+   Wire.requestFrom(0x21 , 1);
+   BP2 = Wire.read();
+   
+   if (BP2 != 2)
+   {
+    goto RETOUR;
+        Wire.endTransmission(0x21);
+   }
+ break;
+
+ case 3:
+   Wire.beginTransmission(0x20);
+   Wire.write(B10110000);
+   Wire.endTransmission(0x20);
+   Wire.requestFrom(0x21 , 1);
+   BP3 = Wire.read();
+   
+   if (BP3 != 4)
+   {
+    goto RETOUR;
+        Wire.endTransmission(0x21);
+   }
+ break;
+
+ case 4:
+   Wire.beginTransmission(0x20);
+   Wire.write(B01110000);
+   Wire.endTransmission(0x20);
+   Wire.requestFrom(0x21 , 1);
+   BP4 = Wire.read();
+   
+   if (BP4 != 8)
+   {
+    goto RETOUR;
+        Wire.endTransmission(0x21);
+   }
+ break;
+}
+}
+ 
+ 
+ 
+ 
