@@ -1,0 +1,49 @@
+int haut = 5;                         //Déclaration des variables
+int droite = 2; 
+int bas = 3;
+int gauche = 4;
+int Pot = A0;
+
+int alea;
+int Val_Pot;
+
+void setup() {
+Serial.begin(9600);
+pinMode(haut,OUTPUT);           //Déclaration des entrée/sortie
+pinMode(droite,OUTPUT);
+pinMode(bas,OUTPUT);
+pinMode(gauche,OUTPUT);
+pinMode(Pot,INPUT);
+
+}
+
+void loop() {
+Val_Pot=analogRead(Pot);             //Lecture du potentiometre
+Val_Pot= map(Val_Pot, 0,1024,500,2000);//Chnager la plage de valeur de 0 à 1024 en 500 à 2000
+alea = random(2,6);                  //Generer une valeur comprise entre 2 et 5
+Serial.println(Val_Pot);             //ecrire dans le moniteur série la valeur de "Val_Pot"
+switch (alea) {                      
+
+case 2:                              //Cas si "alea" = 2
+digitalWrite(droite,HIGH);           //Allumer la LED
+delay(Val_Pot);                      //Valeur du délais egale a la valeur du potentiometre
+digitalWrite(droite,LOW);            //Eteindre la LED
+
+case 3:                              //Cas si "alea" = 3
+digitalWrite(bas,HIGH);
+delay(Val_Pot);
+digitalWrite(bas,LOW);
+
+case 4:                              //Cas si "alea" = 4
+digitalWrite(gauche,HIGH);
+delay(Val_Pot);
+digitalWrite(gauche,LOW);
+
+case 5:                              //Cas si "alea" = 5
+digitalWrite(haut,HIGH);
+delay(Val_Pot);
+digitalWrite(haut,LOW);
+
+}
+
+}
