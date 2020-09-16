@@ -1,0 +1,45 @@
+int haut = 2;               //Déclaration des Leds
+int droite = 3;
+int bas = 4;
+int gauche = 5;
+
+int alea;                   //Valeur Aléatoire
+
+
+
+void setup() {
+pinMode(haut,OUTPUT);       //Déclaration des broches de sortie
+pinMode(droite,OUTPUT);
+pinMode(bas,OUTPUT);
+pinMode(gauche,OUTPUT);
+
+
+}
+
+void loop() {
+alea = random(2,6);         //Génération du nombre aléatoire ( entre 1 et 4 ) le stocker dans alea.
+switch (alea){
+
+case 1:                        //Si alea=1 
+digitalWrite(haut,HIGH);       // allumer led
+delay(1000);                   // attendre 1 seconde
+digitalWrite(haut,LOW);        //éteindre la led
+
+case 2:                         //Si alea=2
+digitalWrite(droite,HIGH);
+delay(1000);
+digitalWrite(droite,LOW);
+
+case 3:                         //Si alea=3
+digitalWrite(bas,HIGH);
+delay(1000);
+digitalWrite(bas,LOW);
+
+case 4:                         //Si alea=4
+digitalWrite(gauche,HIGH);
+delay(1000);
+digitalWrite(gauche,LOW);
+
+}
+
+}
