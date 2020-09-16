@@ -1,0 +1,72 @@
+int haut = 2;
+int droite = 3;
+int bas = 4;
+int gauche = 5;
+
+int BP1 = 6;
+int BP2 = 7;
+int BP3 = 8;
+int BP4 = 9;
+int Val_BP1;
+int Val_BP2;
+int Val_BP3;
+int Val_BP4;
+
+int alea;
+
+
+void setup() {
+  pinMode(haut, OUTPUT);
+  pinMode(droite, OUTPUT);
+  pinMode(bas, OUTPUT);
+  pinMode(gauche, OUTPUT);
+  pinMode(BP1, INPUT);
+  pinMode(BP2, INPUT);
+  pinMode(BP3, INPUT);
+  pinMode(BP4, INPUT);
+
+}
+
+void loop() {
+  alea = random(2, 6);
+  Val_BP1 = digitalRead(BP1);
+  Val_BP2 = digitalRead(BP2);
+  Val_BP3 = digitalRead(BP3);
+  Val_BP4 = digitalRead(BP4);
+  switch (alea) {
+
+    case 2:
+      while (Val_BP1 == 0)
+      {
+        digitalWrite(haut, HIGH);
+        Val_BP1 = digitalRead(BP1);
+      }
+      digitalWrite(haut, LOW);
+
+    case 3:
+      while (Val_BP2 == 0)
+      {
+        digitalWrite(droite, HIGH);
+        Val_BP2 = digitalRead(BP2);
+      }
+      digitalWrite(droite, LOW);
+
+    case 4:
+      while (Val_BP3 == 0)
+      {
+        digitalWrite(bas, HIGH);
+        Val_BP3 = digitalRead(BP3);
+      }
+      digitalWrite(bas, LOW);
+
+    case 5:
+      while (Val_BP4 == 0)
+      {
+        digitalWrite(gauche, HIGH);
+        Val_BP4 = digitalRead(BP4);
+      }
+      digitalWrite(gauche, LOW);
+
+  }
+
+}
